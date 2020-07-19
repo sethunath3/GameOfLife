@@ -11,6 +11,7 @@ namespace GameOfLife.Grid
         public int noOfColumns;
         public float cellGap;
         public CellView cellPrefab;
+        public bool isCircularGrid;
 
         public GridModel(GridScriptableObject gridSO)
         {
@@ -18,6 +19,7 @@ namespace GameOfLife.Grid
             noOfColumns = gridSO.noOfColumns;
             cellGap = gridSO.cellGap;
             cellPrefab = gridSO.cellPrefab;
+            isCircularGrid = gridSO.isCircularGrid;
         }
     }
 }

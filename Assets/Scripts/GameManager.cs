@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GridScriptableObject gridSO;
     private GridController gridController;
+    private float elapsed = 0f; 
+    private bool autoTickEnabled = false;
     void Start()
     {
         gridController = new GridController(gridSO);
@@ -28,9 +30,22 @@ public class GameManager : MonoBehaviour
         gridController.ClearGrid();
     }
 
+    public void ToggleAutoTick()
+    {
+        autoTickEnabled = !autoTickEnabled;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if(autoTickEnabled)
+        {
+            elapsed += Time.deltaTime;
+            if (elapsed >= 1f) 
+            {
+                elapsed = elapsed % 1f;
+                TickGame();
+            }
+        }
     }
 }

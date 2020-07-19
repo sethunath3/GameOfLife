@@ -6,16 +6,10 @@ namespace GameOfLife.Cell
 {
     public class CellView : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private CellController controller;
+        public void SetController(CellController _controller)
         {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            controller = _controller;
         }
 
         public void UpdateColour (State state) {
@@ -24,5 +18,13 @@ namespace GameOfLife.Cell
 		    else
 			    GetComponent<SpriteRenderer> ().color = Color.white;
 	    }
+
+        void OnMouseDown()
+        {
+            if(controller != null)
+            {
+                controller.ToggleCellState();
+            }
+        }
     }
 }

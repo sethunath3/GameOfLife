@@ -15,4 +15,5 @@ public class GridScriptableObject : ScriptableObject
     public float cellGap;
     public CellView cellPrefab;
     public GridView gridPrefab;
+    public bool isCircularGrid;
 }

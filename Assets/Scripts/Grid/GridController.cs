@@ -43,14 +43,84 @@ namespace GameOfLife.Grid
         {
             CellController[] neighbours = new CellController[8];
 
-            neighbours[0] = cells[x, (y + 1) % model.noOfRows]; // top
-            neighbours[1] = cells[(x + 1) % model.noOfColumns, (y + 1) % model.noOfRows]; // top right
-            neighbours[2] = cells[(x + 1) % model.noOfColumns, y % model.noOfRows]; // right
-            neighbours[3] = cells[(x + 1) % model.noOfColumns, (model.noOfRows + y - 1) % model.noOfRows]; // bottom right
-            neighbours[4] = cells[x % model.noOfColumns, (model.noOfRows + y - 1) % model.noOfRows]; // bottom
-            neighbours[5] = cells[(model.noOfColumns + x - 1) % model.noOfColumns, (model.noOfRows + y - 1) % model.noOfRows]; // bottom left
-            neighbours[6] = cells[(model.noOfColumns + x - 1) % model.noOfColumns, y % model.noOfRows]; // left
-            neighbours[7] = cells[(model.noOfColumns + x - 1) % model.noOfColumns, (y + 1) % model.noOfRows]; // top left
+            if(model.isCircularGrid)
+            {
+                neighbours[0] = cells[x, (y + 1) % model.noOfRows]; // top
+                neighbours[1] = cells[(x + 1) % model.noOfColumns, (y + 1) % model.noOfRows]; // top right
+                neighbours[2] = cells[(x + 1) % model.noOfColumns, y % model.noOfRows]; // right
+                neighbours[3] = cells[(x + 1) % model.noOfColumns, (model.noOfRows + y - 1) % model.noOfRows]; // bottom right
+                neighbours[4] = cells[x % model.noOfColumns, (model.noOfRows + y - 1) % model.noOfRows]; // bottom
+                neighbours[5] = cells[(model.noOfColumns + x - 1) % model.noOfColumns, (model.noOfRows + y - 1) % model.noOfRows]; // bottom left
+                neighbours[6] = cells[(model.noOfColumns + x - 1) % model.noOfColumns, y % model.noOfRows]; // left
+                neighbours[7] = cells[(model.noOfColumns + x - 1) % model.noOfColumns, (y + 1) % model.noOfRows]; // top left
+            }
+            else{
+                if(y+1 < model.noOfRows)
+                {
+                    neighbours[0] = cells[x, (y + 1)];
+                }
+                else{
+                    neighbours[0] = null;
+                }
+
+                if((x + 1)<model.noOfColumns && (y + 1) < model.noOfRows)
+                {
+                    neighbours[1] = cells[(x + 1), (y + 1)];
+                }
+                else{
+                    neighbours[1] = null;
+                }
+
+                if((x + 1) < model.noOfColumns)
+                {
+                    neighbours[2] = cells[(x + 1), y];
+                }
+                else{
+                    neighbours[2] = null;
+                }
+
+                if((x + 1) < model.noOfColumns && y>0)
+                {
+                    neighbours[3] = cells[(x + 1), (y - 1)];
+                }
+                else{
+                    neighbours[3] = null;
+                }
+
+                if(y>0)
+                {
+                    neighbours[4] = cells[x, (y - 1)];
+                }
+                else{
+                    neighbours[4] = null;
+                }
+
+                if(x>0 && y>0)
+                {
+                    neighbours[5] = cells[(x - 1), (y - 1)];
+                }
+                else{
+                    neighbours[5] = null;
+                }
+
+                if(x>0)
+                {
+                    neighbours[6] = cells[(x - 1), y];
+                }
+                else{
+                    neighbours[6] = null;
+                }
+
+                if(x>0 && (y + 1) < model.noOfRows)
+                {
+                    neighbours[7] = cells[(x - 1), (y + 1)];
+                }
+                else{
+                    neighbours[7] = null;
+                }
+            }
+
+            
             
             return neighbours;
         }

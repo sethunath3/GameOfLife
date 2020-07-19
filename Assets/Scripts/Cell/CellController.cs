@@ -22,6 +22,7 @@ namespace GameOfLife.Cell
         public CellController(int x, int y, GridController gridController)
         {
             view = GameObject.Instantiate<CellView>(gridController.GetCellPrefab(), new Vector2(0,0), Quaternion.identity);
+            view.SetController(this);
             view.transform.position = new Vector2(0+((x-(gridController.GetNoOfRows()/2))*view.transform.localScale.x*gridController.GetCellGap()),0+((y-(gridController.GetNoOfColumns()/2))*view.transform.localScale.y*gridController.GetCellGap()));
             view.transform.parent = gridController.GetGridView().transform;
         }
@@ -38,12 +39,24 @@ namespace GameOfLife.Cell
 		    if (state == State.Alive) 
             {
 			    if (aliveCells < 2 || aliveCells > 3)
-				    nextState = State.Dead;
+                {
+                    nextState = State.Dead;
+                }
+                else
+                {
+                    nextState = State.Alive;
+                }
 		    } 
             else 
             {
 			    if (aliveCells == 3)
-				    nextState = State.Alive;
+                {
+                    nextState = State.Alive;
+                }
+                else
+                {
+                    nextState = State.Dead;
+                }
 		    }
         }
 
@@ -81,6 +94,18 @@ namespace GameOfLife.Cell
                 nextState = State.Alive;
             }
             view.UpdateColour (state);
+        }
+
+        public void ToggleCellState()
+        {
+            if (state == State.Alive) 
+            {
+                state = State.Dead;
+            }
+            else{
+                state = State.Alive;
+            }
+            view.UpdateColour(state);
         }
     }
 }

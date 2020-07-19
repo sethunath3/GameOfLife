@@ -27,5 +27,10 @@ namespace GameOfLife
         {
             manager.ClearGrid();
         } 
+        
+        public void CB_OnStartStopClick()
+        {
+            manager.ToggleAutoTick();
+        }
     }
 }
